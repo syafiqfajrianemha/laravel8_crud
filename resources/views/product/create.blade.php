@@ -54,7 +54,7 @@
                         <div class="mb-3">
                             <div class="row">
                                 <div class="col-lg-3">
-                                    <img src="{{ asset('storage/images/default-image.jpg') }}" alt="default-image" class="img-thumbnail img-preview" width="100">
+                                    <img src="{{ asset('images/default-image.jpg') }}" alt="default-image" class="img-thumbnail img-preview" width="100">
                                 </div>
                                 <div class="col-lg-9">
                                     <label for="image" class="form-label">Image</label>

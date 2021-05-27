@@ -36,7 +36,7 @@
                     <tr>
                         <th scope="row">{{ ++$no }}</th>
                         <td>
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="photo of {{ $product->name }}" width="100">
+                            <img src="{{ asset('images/' . $product->image) }}" alt="photo of {{ $product->name }}" width="100">
                         </td>
                         <td>{{ $product->name }}</td>
                         <td>IDR {{ number_format($product->price, 0, '.', '.') }}</td>

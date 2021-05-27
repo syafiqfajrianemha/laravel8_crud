@@ -6,7 +6,7 @@
     <div class="card my-4">
         <div class="row g-0">
             <div class="col-lg-6">
-                <img src="{{ asset('storage/' . $product->image) }}" alt="photo of {{ $product->name }}" width="500">
+                <img src="{{ asset('images/' . $product->image) }}" alt="photo of {{ $product->name }}" width="500">
             </div>
             <div class="col-lg-6">
                 <div class="card-body">

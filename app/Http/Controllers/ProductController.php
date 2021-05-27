@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -53,12 +54,19 @@ class ProductController extends Controller
             'category_id'   => 'required|numeric'
         ]);
 
-        $image = $request->file('image');
-        $imageName = $image->storeAs(
-            $this->path,
-            time() . '.' . $image->getClientOriginalExtension(),
-            'public'
-        );
+        // $imageName = $image->storeAs(
+        //     $this->path,
+        //     time() . '.' . $image->getClientOriginalExtension(),
+        //     'public'
+        // );
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+
+            if ($image->isValid()) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move('images', $imageName);
+            }
+        }
 
         Product::create([
             'name'          => $request->name,
@@ -118,13 +126,14 @@ class ProductController extends Controller
         $imageName = $product->image;
 
         if ($request->hasFile('image')) {
-            Storage::delete('public/' . $imageName);
             $image = $request->file('image');
-            $imageName = $image->storeAs(
-                $this->path,
-                time() . '.' . $image->getClientOriginalExtension(),
-                'public'
-            );
+            // Storage::delete('public/' . $imageName);
+            File::delete('images/' . $imageName);
+
+            if ($image->isValid()) {
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move('images', $imageName);
+            }
         }
 
         $product->update([
@@ -148,7 +157,8 @@ class ProductController extends Controller
     {
         $product = Product::find($id);
 
-        Storage::delete('public/' . $product->image);
+        // File::delete('public/' . $product->image);
+        File::delete('images/' . $product->image);
         Product::destroy($product->id);
 
         return redirect()->route('product.index')->with('message', 'Product has been deleted');
