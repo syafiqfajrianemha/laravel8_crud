@@ -6,11 +6,11 @@ use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
+// use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    private $path = 'images';
+    // private $path = 'images';
 
     /**
      * Display a listing of the resource.
